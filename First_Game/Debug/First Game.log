@@ -1,0 +1,22 @@
+﻿  stdafx.cpp
+  First Game.cpp
+  main.cpp
+f:\game\first game solution\first game\main.cpp(5): error C2065: 'SDL_INIT_EVERYTHING': undeclared identifier
+f:\game\first game solution\first game\main.cpp(5): error C3861: 'SDL_Init': identifier not found
+f:\game\first game solution\first game\main.cpp(6): error C2065: 'SDL_Window': undeclared identifier
+f:\game\first game solution\first game\main.cpp(6): error C2065: 'window': undeclared identifier
+f:\game\first game solution\first game\main.cpp(6): error C2065: 'SDL_WINDOWPOS_CENTERED': undeclared identifier
+f:\game\first game solution\first game\main.cpp(6): error C2065: 'SDL_WINDOW_SHOWN': undeclared identifier
+f:\game\first game solution\first game\main.cpp(6): error C3861: 'SDL_CreateWindow': identifier not found
+f:\game\first game solution\first game\main.cpp(7): error C2065: 'SDL_Renderer': undeclared identifier
+f:\game\first game solution\first game\main.cpp(7): error C2065: 'renderer': undeclared identifier
+f:\game\first game solution\first game\main.cpp(7): error C2065: 'window': undeclared identifier
+f:\game\first game solution\first game\main.cpp(7): error C3861: 'SDL_CreateRenderer': identifier not found
+f:\game\first game solution\first game\main.cpp(8): error C2065: 'renderer': undeclared identifier
+f:\game\first game solution\first game\main.cpp(8): error C3861: 'SDL_SetRenderDrawColor': identifier not found
+f:\game\first game solution\first game\main.cpp(10): error C2065: 'renderer': undeclared identifier
+f:\game\first game solution\first game\main.cpp(10): error C3861: 'SDL_RenderClear': identifier not found
+f:\game\first game solution\first game\main.cpp(12): error C2065: 'renderer': undeclared identifier
+f:\game\first game solution\first game\main.cpp(12): error C3861: 'SDL_RenderPresent': identifier not found
+f:\game\first game solution\first game\main.cpp(14): error C3861: 'SDL_Delay': identifier not found
+  Generating Code...
