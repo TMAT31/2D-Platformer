@@ -1,21 +1,26 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "Map.h"
+#include "Components.h"
 
-SDL_Texture* playerTex;
-SDL_Rect srcR, destR;
 
+Map* map;
 
-Game::Game() {
+SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
 
+Manager manager;
+auto&newPlayer(manager.addEntity());
+
+Game::Game() {	
 }
-Game::~Game() {
-
+Game::~Game() {	
 }
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
 	int flags = 0;
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
-		
 	}
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -36,14 +41,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else {
 		isRunning = false;
 	}
+	player = new GameObject("Assets/character1.png", 0, 0 );
+	map = new Map();
 
-	SDL_Surface* tmpSurface = IMG_Load("Assets/character1.png");
-	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-	SDL_FreeSurface(tmpSurface);
+	newPlayer.addComponent<PositionComponenent>();
+	newPlayer.getComponent<PositionComponenent>().setPos(500, 500);
 }
 
 void Game::handle_events() {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
 		case SDL_QUIT:
@@ -54,17 +59,18 @@ void Game::handle_events() {
 	}
 }
 void Game::update() {
-	cnt++;
-	destR.h = 128;
-	destR.w = 128;
-	destR.x = cnt;
-	std::cout << cnt << std::endl;
+	
+	player->Update();
+	manager.update();
+	std::cout << newPlayer.getComponent<PositionComponenent>().x() << "," <<
+		newPlayer.getComponent<PositionComponenent>().y() << std::endl;
 }
 void Game::render() {
+	
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+	map->DrawMap();
+	player->Render();
 	SDL_RenderPresent(renderer);
-
 }
 
 void Game::clean() {

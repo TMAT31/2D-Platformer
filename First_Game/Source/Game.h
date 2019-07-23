@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
+#include <string>
 
 class Game {
 
@@ -19,13 +20,14 @@ public:
 
 	bool running() { return isRunning; }
 
+	static SDL_Renderer *renderer;
+	static SDL_Event event;
+
 private:
 	int cnt = 0;
 	bool isRunning;
 	SDL_Window *window;
-	SDL_Renderer *renderer;
-
-
+	
 };
 
 #endif /*Game_hpp*/

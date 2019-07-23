@@ -1,4 +1,10 @@
 ﻿  Game.cpp
+c1xx : fatal error C1083: Cannot open source file: 'Source\Game.cpp': No such file or directory
+  GameObject.cpp
+c1xx : fatal error C1083: Cannot open source file: 'Source\GameObject.cpp': No such file or directory
   main.cpp
+  map.cpp
+c1xx : fatal error C1083: Cannot open source file: 'Source\map.cpp': No such file or directory
+  TextureManager.cpp
+c1xx : fatal error C1083: Cannot open source file: 'Source\TextureManager.cpp': No such file or directory
   Generating Code...
-  First Game.vcxproj -> F:\Game\First_Game\x64\Debug\First Game.exe
