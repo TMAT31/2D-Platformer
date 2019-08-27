@@ -46,9 +46,10 @@ private:
 public:
 	void update() {
 		for (auto& c : components) c->update();
+	}
+	void draw() {
 		for (auto& c : components) c->draw();
 	}
-	void draw() {}
 	bool isActive() const { return active; }
 	void destroy() { active = false; }
 
@@ -57,7 +58,7 @@ public:
 	}
 
 	template <typename T, typename... TArgs>
-	T& addComponent(TArgs&&... mArgs) {
+	T& addComponent(TArgs&&... mArgs) {                 //argument forwarding, maintains lvalue and rvalue types enabling perfect forwarding
 		T* c(new T(std::forward<TArgs>(mArgs)...));     //() means direct initilization , creates a new pointer to component type T
 		c->entity = this;
 		std::unique_ptr<Component> uPtr{ c };		    

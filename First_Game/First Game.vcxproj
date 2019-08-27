@@ -24,6 +24,7 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\map.cpp" />
     <ClCompile Include="Source\TextureManager.cpp" />
+    <ClCompile Include="Source\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Components.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="Source\TransformComponent.h" />
     <ClInclude Include="Source\SpriteComponent.h" />
     <ClInclude Include="Source\TextureManager.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

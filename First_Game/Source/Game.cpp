@@ -2,22 +2,22 @@
 #include "TextureManager.h"
 #include "Map.h"
 #include "Components.h"
+#include "Vector2D.h"
 
 
 Map* map;
+Manager manager;
 
 SDL_Renderer* Game::renderer = nullptr;
-SDL_Event Game::event;
 
-Manager manager;
-auto&newPlayer(manager.addEntity());
+auto&player(manager.addEntity());
 
 Game::Game() {	
 }
 Game::~Game() {	
 }
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
+void Game::init(const char* title, int width, int height, bool fullscreen) {
 	int flags = 0;
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
@@ -25,7 +25,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		std::cout << "Subsystem Initialised!..." << std::endl;
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+		window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
 		if (window)
 		{
 			std::cout << "Window created!" << std::endl;
@@ -41,14 +41,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else {
 		isRunning = false;
 	}
-	player = new GameObject("Assets/character1.png", 0, 0 );
 	map = new Map();
 
-	newPlayer.addComponent<PositionComponenent>();
-	newPlayer.getComponent<PositionComponenent>().setPos(500, 500);
+	player.addComponent<TransformComponent>();
+	player.addComponent<SpriteComponent>("Assets/character1.png");
 }
 
 void Game::handle_events() {
+	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type) {
 		case SDL_QUIT:
@@ -59,17 +59,18 @@ void Game::handle_events() {
 	}
 }
 void Game::update() {
-	
-	player->Update();
+	manager.refresh();
 	manager.update();
-	std::cout << newPlayer.getComponent<PositionComponenent>().x() << "," <<
-		newPlayer.getComponent<PositionComponenent>().y() << std::endl;
+	player.getComponent<TransformComponent>().position.Add(Vector2D(5, 0));
+	if (player.getComponent<TransformComponent>().position.x > 100) {
+		player.getComponent<SpriteComponent>().setTex("Assets/enemy1.png");
+	}
 }
 void Game::render() {
 	
 	SDL_RenderClear(renderer);
 	map->DrawMap();
-	player->Render();
+	manager.draw();
 	SDL_RenderPresent(renderer);
 }
 
